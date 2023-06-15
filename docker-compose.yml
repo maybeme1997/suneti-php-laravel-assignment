@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        USER: ${USER}
+    container_name: app
+    volumes:
+      - ./:/app
+    working_dir: /app
+    expose:
+      - "9000"
+    user: "1000:1000"
+    depends_on:
+      - database
+
+  webserver:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/app.conf
+      - ./:/app
+    depends_on:
+      - app
+
+  database:
+    image: postgres:10
+    environment:
+      POSTGRES_DB: assignment
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - pgdata:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata: null
