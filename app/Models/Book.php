@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $price
  * @property string $genre
  * @property string $subgenre
+ * @property int $sort_order
+ * @property int $stock_amount
  * @property int $writer_id
  * @property int $publisher_id
  * @property \Carbon\Carbon $created_at

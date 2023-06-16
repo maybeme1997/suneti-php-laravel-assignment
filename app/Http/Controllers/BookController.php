@@ -42,6 +42,7 @@ class BookController extends Controller
             'publication_year' => 'required|integer|min:1900|max:' . date('Y'),
             'price' => 'required|numeric|min:0',
             'genre' => 'required|string|max:255',
+            'stock_amount' => 'required|integer|min:0',
             'subgenre' => 'required|string|max:255',
             'writer_id' => 'required|exists:writers,id',
             'publisher_id' => 'required|exists:publishers,id',
@@ -53,6 +54,8 @@ class BookController extends Controller
             'publication_year' => $request->input('publication_year'),
             'price' => $request->input('price'),
             'genre' => $request->input('genre'),
+            'sort_order' => -1,
+            'stock_amount' => $request->input('stock_amount'),
             'subgenre' => $request->input('subgenre'),
             'writer_id' => $request->input('writer_id'),
             'publisher_id' => $request->input('publisher_id'),
@@ -91,6 +94,7 @@ class BookController extends Controller
             'price' => 'required|numeric|min:0',
             'genre' => 'required|string|max:255',
             'subgenre' => 'required|string|max:255',
+            'stock_amount' => 'required|integer|min:0',
             'writer_id' => 'required|exists:writers,id',
             'publisher_id' => 'required|exists:publishers,id',
         ]);
@@ -102,9 +106,26 @@ class BookController extends Controller
             'price' => $request->input('price'),
             'genre' => $request->input('genre'),
             'subgenre' => $request->input('subgenre'),
+            'sort_order' => -1,
+            'stock_amount' => $request->input('stock_amount'),
             'writer_id' => $request->input('writer_id'),
             'publisher_id' => $request->input('publisher_id'),
         ]);
+
+        return redirect()->route('books.index');
+    }
+
+    /**
+     * Reorder the books.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Book  $book
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function reOrder(Request $request, Book $book)
+    {
+        throw new \Exception('Not implemented yet');
 
         return redirect()->route('books.index');
     }

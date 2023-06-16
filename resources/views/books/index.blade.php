@@ -14,6 +14,7 @@
                     <th>Price</th>
                     <th>Genre</th>
                     <th>Subgenre</th>
+                    <th>Stock</th>
                     <th>Writer</th>
                     <th>Publisher</th>
                     <th>Action</th>
@@ -28,10 +29,17 @@
                         <td>{{ $book->price }}</td>
                         <td>{{ $book->genre }}</td>
                         <td>{{ $book->subgenre }}</td>
+                        <td>{{ $book->stock_amount }}</td>
                         <td>{{ $book->writer->name }}</td>
                         <td>{{ $book->publisher->name }}</td>
                         <td>
                             <a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                            <form action="{{ route('books.reOrder', $book) }}" method="POST">
+                                @csrf
+                                <input type="number" name="up" placeholder="Up">
+                                <input type="number" name="down" placeholder="Down">
+                                <button type="submit">Move</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
