@@ -36,13 +36,12 @@ class WriterController extends Controller
             'bio' => 'nullable|string',
         ]);
 
-        $writer = Writer::create([
+        Writer::create([
             'name' => $request->input('name'),
             'bio' => $request->input('bio'),
         ]);
 
-        return redirect()->route('writers.index', $writer->id)
-            ->with('success', 'Writer created successfully.');
+        return redirect()->route('writers.index');
     }
 
     /**
@@ -75,7 +74,6 @@ class WriterController extends Controller
             'bio' => $request->input('bio'),
         ]);
 
-        return redirect()->route('writers.index', $writer->id)
-            ->with('success', 'Writer updated successfully.');
+        return redirect()->route('writers.index');
     }
 }

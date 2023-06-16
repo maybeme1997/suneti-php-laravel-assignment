@@ -36,13 +36,12 @@ class PublisherController extends Controller
             'location' => 'required|string|max:255',
         ]);
 
-        $publisher = Publisher::create([
+        Publisher::create([
             'name' => $request->input('name'),
             'location' => $request->input('location'),
         ]);
 
-        return redirect()->route('publishers.index', $publisher->id)
-            ->with('success', 'Publisher created successfully.');
+        return redirect()->route('publishers.index');
     }
 
     /**
@@ -75,7 +74,6 @@ class PublisherController extends Controller
             'location' => $request->input('location'),
         ]);
 
-        return redirect()->route('publishers.index', $publisher->id)
-            ->with('success', 'Publisher updated successfully.');
+        return redirect()->route('publishers.index');
     }
 }
