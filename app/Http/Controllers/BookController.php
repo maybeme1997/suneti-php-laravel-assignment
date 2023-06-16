@@ -47,7 +47,7 @@ class BookController extends Controller
             'publisher_id' => 'required|exists:publishers,id',
         ]);
 
-        $book = Book::create([
+        Book::create([
             'title' => $request->input('title'),
             'ISBN' => $request->input('ISBN'),
             'publication_year' => $request->input('publication_year'),
@@ -58,8 +58,7 @@ class BookController extends Controller
             'publisher_id' => $request->input('publisher_id'),
         ]);
 
-        return redirect()->route('books.index', $book->id)
-            ->with('success', 'Book created successfully.');
+        return redirect()->route('books.index');
     }
 
     /**
@@ -107,7 +106,6 @@ class BookController extends Controller
             'publisher_id' => $request->input('publisher_id'),
         ]);
 
-        return redirect()->route('books.index', $book->id)
-            ->with('success', 'Book updated successfully.');
+        return redirect()->route('books.index');
     }
 }
