@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Publishers</h1>
+        <a href="{{ route('publishers.create') }}" class="btn btn-primary">Add Publisher</a>
 
         <table class="table">
             <thead>
