@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\GenerateArt;
 use App\Models\Book;
 use App\Models\Publisher;
 use App\Models\Writer;
@@ -123,6 +124,21 @@ class BookController extends Controller
             $this->closeSortOrderGaps($currentSortOrder);
         }
 
+        return redirect()->route('books.index');
+    }
+
+
+    /**
+     * Add an AI generated picture to the book.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Book  $book
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function addArt(Request $request, Book $book): \Illuminate\Http\RedirectResponse
+    {
+        $this->dispatch(new GenerateArt($book));
         return redirect()->route('books.index');
     }
 

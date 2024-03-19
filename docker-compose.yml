@@ -18,6 +18,14 @@ services:
     depends_on:
       - database
 
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes --requirepass myapp
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "6379:6379"
+
   webserver:
     image: nginx:latest
     ports:
@@ -39,5 +47,21 @@ services:
     ports:
       - "5432:5432"
 
+  stable-diffusion:
+    image: gadicc/diffusers-api:latest
+    environment:
+      HF_AUTH_TOKEN: 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
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+
 volumes:
   pgdata: null
+

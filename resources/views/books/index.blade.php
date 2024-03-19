@@ -8,6 +8,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Art cover</th>
                     <th>Title</th>
                     <th>ISBN</th>
                     <th>Publication Year</th>
@@ -25,6 +26,14 @@
             <tbody>
                 @foreach ($books as $book)
                     <tr>
+                        <td>
+                            @if($book->image === null)
+                                <a href="{{ route('books.addArt', $book) }}" class="btn btn-sm btn-primary">Add Art</a>
+                            @else
+                                <img src="{{ asset('storage/' . $book->image . '.png') }}" alt="Art cover" width="100"> <br>
+                                <a href="{{ route('books.addArt', $book) }}" class="btn btn-sm btn-primary">Change Art</a>
+                            @endif
+                        </td>
                         <td>{{ $book->title }}</td>
                         <td>{{ $book->ISBN }}</td>
                         <td>{{ $book->publication_year }}</td>

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $stock_amount
  * @property int $writer_id
  * @property int $publisher_id
+ * @property string $image
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
